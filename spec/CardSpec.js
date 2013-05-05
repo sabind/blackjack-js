@@ -1,10 +1,10 @@
 describe("Test a card 'toString Works'", function() {
-  var seven = new Card(7);
-  var ten = new Card(10);
-  var ace = new Card(1);
-  var jack = new Card(11);
-  var queen = new Card(12);
-  var king = new Card(13);
+  var seven = new Card(7, SUIT.CLUB);
+  var ten = new Card(10, SUIT.CLUB);
+  var ace = new Card(1, SUIT.CLUB);
+  var jack = new Card(11, SUIT.CLUB);
+  var queen = new Card(12, SUIT.CLUB);
+  var king = new Card(13, SUIT.CLUB);
   
   it("A numeric card can be created accurately.", function() {
     expect(seven.toString()).toBe('7');
