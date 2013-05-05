@@ -1,11 +1,19 @@
 function Hand() {
-	this.cards = new Array();
-};
+	this.cards = [];
+}
 
 Hand.prototype.count = function() {
-    this.cards.length;
+    return this.cards.length;
 };
 
 Hand.prototype.addCard = function(card) {
-	this.cards[this.count] = card;
+	this.cards.push(card);
+};
+
+Hand.prototype.clear = function() {
+    this.cards = [];
+};
+
+Hand.prototype.isEmpty = function() {
+    return this.cards.length() === 0;
 };
