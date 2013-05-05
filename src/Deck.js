@@ -1,9 +1,3 @@
-var DECK_SIZE = 52;
-Object.freeze(DECK_SIZE);
-
-var TIMES_TO_SHUFFLE = 15;
-Object.freeze(TIMES_TO_SHUFFLE);
-
 function Deck() {
     this.cards = this.generateShuffledDeck();
 }
