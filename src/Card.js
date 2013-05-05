@@ -31,20 +31,20 @@ Card.prototype.isAce = function() {
 
 Card.prototype.toString = function() {
     if (this.value == 1) {
-        return "A " + this.suit.code;
+        return "A" + this.suit.code;
     }
     else if (this.value > 1 && this.value < 11) {
-        return "" + this.value + " " + this.suit.code; // Concatenating an empty string to something calls toString()
+        return this.value + "" + this.suit.code; // Concatenating an empty string to something calls toString()
     }
     else if (this.value == 11) 
     {
-        return "J " + this.suit.code;
+        return "J" + this.suit.code;
     }
     else if (this.value == 12) {
-        return "Q " + this.suit.code;
+        return "Q" + this.suit.code;
     }
     else if (this.value == 13) {
-        return "K " + this.suit.code;
+        return "K" + this.suit.code;
     }
     else 
     {
