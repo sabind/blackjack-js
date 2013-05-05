@@ -7,36 +7,36 @@ describe("Test a card 'toString Works'", function() {
   var king = new Card(13, SUIT.CLUB);
   
   it("A numeric card can be created accurately.", function() {
-    expect(seven.toString()).toBe('7');
+    expect(seven.toString()).toBe('7 C');
   });
   
   it("A 10 card can be created accurately.", function() {
-    expect(ten.toString()).toBe('10');
+    expect(ten.toString()).toBe('10 C');
   });
   
   it("An A card can be created accurately.", function() {
-    expect(ace.toString()).toBe('A');
+    expect(ace.toString()).toBe('A C');
   });
   
   it("A J card can be created accurately.", function() {
-    expect(jack.toString()).toBe('J');
+    expect(jack.toString()).toBe('J C');
   });
   
   it("A Q card can be created accurately.", function() {
-    expect(queen.toString()).toBe('Q');
+    expect(queen.toString()).toBe('Q C');
   });
   
   it("A K card can be created accurately.", function() {
-    expect(king.toString()).toBe('K');
+    expect(king.toString()).toBe('K C');
   });
   
 });
 
 describe("Test a card can be retrieved correctly", function() {
     
-    var ace = new Card(1);
-    var seven = new Card(7);
-    var jack = new Card(11);
+    var ace = new Card(1, SUIT.CLUB);
+    var seven = new Card(7, SUIT.CLUB);
+    var jack = new Card(11, SUIT.CLUB);
     
     it("A numeric card's value is calculated correctly", function() {
         expect(seven.valueLow()).toBe(7);
