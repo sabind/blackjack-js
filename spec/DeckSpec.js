@@ -10,7 +10,18 @@ describe("Test a deck works.", function() {
         deck = new Deck();
     });
     
-	it("The a new deck has the right number of cards in it.", function () {
+	it("A new deck has the right number of cards in it.", function () {
 		expect(deck.cardsRemaining()).toBe(52);
 	});
+    
+    it("The a deck subtracts cards it deals out.", function () {
+    	deck.dealCard();
+        expect(deck.cardsRemaining()).toBe(51);
+        deck.dealCard();
+        expect(deck.cardsRemaining()).toBe(50);
+        deck.dealCard();
+        expect(deck.cardsRemaining()).toBe(49);
+	});
+    
+    
 });
