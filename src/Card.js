@@ -6,6 +6,9 @@ var SUIT = {
 };
 Object.freeze(SUIT);
 
+var NUMBER_OF_SUITS = 4;
+Object.freeze(NUMBER_OF_SUITS);
+
 function Card (value, suit) {
     switch (suit) {
         case SUIT.CLUB:
