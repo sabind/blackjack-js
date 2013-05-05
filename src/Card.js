@@ -9,18 +9,39 @@ function Card (value, suit) {
         DIAMOND : {value: 3, name: "diamond", code: "D"}
     };
     Object.freeze(SUIT);
-    
-    value = function(acesLow) {
+}
+
+Card.prototype.isAce = function() {
+    return this.value == 1;
+};
+
+Card.prototype.toString = function() {
+    if (this.value == 1) {
+        return "A";
+    }
+    else if (this.value > 1 && this.value < 11) {
+        return "" + this.value; // Concatenating an empty string to something calls toString()
+    }
+    else if (this.value == 11) 
+    {
+        return "J";
+    }
+    else if (this.value == 12) {
+        return "Q";
+    }
+    else if (this.value == 13) {
+        return "K";
+    }
+    else 
+    {
+        return "NaC"; //Not a Card
+    }
+};
+
+Card.prototype.valueHigh = function() {
     if (this.value == 1) 
     {
-        if (acesLow) 
-        {
-            return 1;
-        } 
-        else 
-        {
-            return 11;
-        }
+        return 11;
     } 
     else 
     {
@@ -34,31 +55,21 @@ function Card (value, suit) {
         }
     }
 };
-}
-
-Card.prototype.isAce = function() {
-    return this.value == 1;
-};
-
-Card.prototype.toString = function() {
-    if (this.value == 1) {
-        return "A";
-    }
-	else if (this.value > 1 && this.value < 11) {
-        return "" + this.value; // Concatenating an empty string to something calls toString()
-	}
-	else if (this.value == 11) 
+    
+Card.prototype.valueLow = function() {
+    if (this.value == 1) 
     {
-		return "J";
-    }
-    else if (this.value == 12) {
-        return "Q";
-	}
-    else if (this.value == 13) {
-        return "K";
-	}
+        return 1;
+    } 
     else 
     {
-        return "NaC"; //Not a Card
+        if (this.value > 10)
+        {
+            return 10;
+        }
+        else 
+        {
+            return this.value;
+        }
     }
 };

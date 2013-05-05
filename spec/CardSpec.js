@@ -38,8 +38,19 @@ describe("Test a card can be retrieved correctly", function() {
     var seven = new Card(7);
     var jack = new Card(11);
     
-    it("A numeric card can be created accurately.", function() {
-        expect(seven.toString()).toBe('7');
+    it("A numeric card's value is calculated correctly", function() {
+        expect(seven.valueLow()).toBe(7);
+        expect(seven.valueHigh()).toBe(7);
+    });
+
+    it("A jack's value is calculated correctly", function() {
+        expect(jack.valueLow()).toBe(10);
+        expect(jack.valueHigh()).toBe(10);
+    });
+
+    it("An ace's value is calculated correctly", function() {
+        expect(ace.valueLow()).toBe(1);
+        expect(ace.valueHigh()).toBe(11);
     });
     
 });
