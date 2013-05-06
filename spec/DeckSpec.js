@@ -2,21 +2,27 @@ describe("Test a deck works.", function() {
 
     var deck = new Deck();
     
-    var testDeckForCompleteness = function(deck) {
+    var testDeckForCompleteness = function() {
         var threeCount = 0;
     	var jackCount = 0;
 		var aceCount = 0;
+        var string = "3";
 
 		for (var i = 0; i < DECK_SIZE; i++)
 		{
+            var re3 = /3[DCHS]/;
+            var reJ = /J[DCHS]/;
+            var reA = /A[DCHS]/;
+            
 			var card = deck.dealCard();
-			if (card.toString().equals("3")) {
+            
+			if (card.toString().match(re3)) {
 				threeCount++;
 			}
-			if (card.toString().equals("J")) {
+			if (card.toString().match(reJ)) {
 				jackCount++; 
 			}
-			if (card.toString().equals("A")) {
+			if (card.toString().match(reA)) {
 				aceCount++;
 			}
 		}
