@@ -36,16 +36,16 @@ describe("Test a deck works.", function() {
     });
     
     it("A new deck has the right number of cards in it.", function() {
-        expect(deck.cardsRemaining()).toBe(52);
+        expect(deck.cardsRemaining()).toBe(NUM_DECKS * DECK_SIZE);
     });
 
     it("The a deck subtracts cards it deals out.", function() {
         deck.dealCard();
-        expect(deck.cardsRemaining()).toBe(51);
+        expect(deck.cardsRemaining()).toBe(NUM_DECKS * DECK_SIZE - 1);
         deck.dealCard();
-        expect(deck.cardsRemaining()).toBe(50);
+        expect(deck.cardsRemaining()).toBe(NUM_DECKS * DECK_SIZE - 2);
         deck.dealCard();
-        expect(deck.cardsRemaining()).toBe(49);
+        expect(deck.cardsRemaining()).toBe(NUM_DECKS * DECK_SIZE - 3);
     });
 
     it("A new deck must be complete.", function() {
