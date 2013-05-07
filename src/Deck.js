@@ -11,7 +11,20 @@ function Deck() {
 
         for (var i = 0; i < NUMBER_OF_SUITS; ++i) {
             for (var j = 1; j <= DECK_SIZE / NUMBER_OF_SUITS; ++j) {
-                cards.push(new Card(j, i));
+                switch (i) {
+                case SUIT.CLUB.value:
+                    cards.push(new Card(j, SUIT.CLUB));
+                    break;
+                case SUIT.DIAMOND.value:
+                    cards.push(new Card(j, SUIT.DIAMOND));
+                    break;
+                case SUIT.HEART.value:
+                    cards.push(new Card(j, SUIT.HEART));
+                    break;
+                case SUIT.SPADE.value:
+                    cards.push(new Card(j, SUIT.SPADE));
+                    break;
+                }
             }
         }
     };
@@ -33,7 +46,9 @@ function Deck() {
 }
 
 Deck.prototype.dealCard = function() {
-    return this.cards.pop();
+    var card = this.cards[0];
+    this.cards.shift();
+    return card;
 }
 
 Deck.prototype.cardsRemaining = function() {

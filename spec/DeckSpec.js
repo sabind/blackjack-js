@@ -2,18 +2,17 @@ describe("Test a deck works.", function() {
 
     var deck = new Deck();
 
-    var testDeckForCompleteness = function() {
+    var testDeckForCompleteness = function(deckToTest) {
         var threeCount = 0;
         var jackCount = 0;
         var aceCount = 0;
-        var string = "3";
 
         for (var i = 0; i < DECK_SIZE; i++) {
             var re3 = /3[DCHS]/;
             var reJ = /J[DCHS]/;
             var reA = /A[DCHS]/;
 
-            var card = deck.dealCard();
+            var card = deckToTest.dealCard();
 
             if (card.toString().match(re3)) {
                 threeCount++;
@@ -27,7 +26,7 @@ describe("Test a deck works.", function() {
         }
         return threeCount === NUMBER_OF_SUITS && jackCount === NUMBER_OF_SUITS && aceCount === NUMBER_OF_SUITS;
     };
-
+    
     beforeEach(function() {
         deck = new Deck();
     });
@@ -35,7 +34,7 @@ describe("Test a deck works.", function() {
     afterEach(function() {
         deck = new Deck();
     });
-
+    
     it("A new deck has the right number of cards in it.", function() {
         expect(deck.cardsRemaining()).toBe(52);
     });
@@ -49,7 +48,7 @@ describe("Test a deck works.", function() {
         expect(deck.cardsRemaining()).toBe(49);
     });
 
-    it("A new deck has the right number of cards in it.", function() {
+    it("A new deck must be complete.", function() {
         expect(testDeckForCompleteness(deck)).toBe(true);
     });
 

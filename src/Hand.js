@@ -64,7 +64,7 @@ Hand.prototype.totalHandValue = function() {
 	} else {
 		return sum;
 	}
-}
+};
 
 
 Hand.prototype.clear = function() {
@@ -73,4 +73,8 @@ Hand.prototype.clear = function() {
 
 Hand.prototype.isEmpty = function() {
     return this.cards.length === 0;
+};
+
+Hand.prototype.cardTotal = function() {
+    return this.cards.length;
 };
