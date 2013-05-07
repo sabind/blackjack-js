@@ -1,6 +1,6 @@
-function Hand() {
+var Hand = function() {
     this.cards = [];
-}
+};
 
 Hand.prototype.count = function() {
     return this.cards.length;

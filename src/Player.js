@@ -1,7 +1,7 @@
-function Player(name) {
+var Player = function(name) {
     this.name = name;
     this.hand = new Hand();
-}
+};
 
 Player.prototype.handValue = function() {
     return this.hand.totalHandValue();
@@ -29,4 +29,4 @@ Player.prototype.getNumberOfCardsInHand = function() {
 
 Player.prototype.dealCard = function(card) {
     this.hand.addCard(card);
-}
+};

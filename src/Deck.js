@@ -1,7 +1,7 @@
 var DECK_SIZE = 52;
 var NUMBER_OF_SHUFFLES = 15;
 
-function Deck() {
+var Deck = function() {
     this.cards = new Array();
 
     function generateShuffledDeck(cards) {
@@ -27,7 +27,7 @@ function Deck() {
                 }
             }
         }
-    };
+    }
 
     function shuffle(cards) {
         for (var i = 0; i < NUMBER_OF_SHUFFLES; ++i) {
@@ -39,18 +39,18 @@ function Deck() {
             cards[toIndex] = temp;
         }
 
-    };
+    }
 
     generateShuffledDeck(this.cards);
     shuffle(NUMBER_OF_SHUFFLES, this.cards);
-}
+};
 
 Deck.prototype.dealCard = function() {
     var card = this.cards[0];
     this.cards.shift();
     return card;
-}
+};
 
 Deck.prototype.cardsRemaining = function() {
-    return this.cards.length
+    return this.cards.length;
 };
