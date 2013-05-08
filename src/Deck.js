@@ -1,6 +1,6 @@
 var DECK_SIZE = 52;
 var NUM_DECKS = 4;
-var NUMBER_OF_SHUFFLES = 15;
+var NUMBER_OF_SHUFFLES = 300;
 
 var Deck = function(numDecks) {
     this.cards = new Array();

@@ -1,23 +1,172 @@
 <html>
-<head>
-<script type="text/javascript" src="spec/SpecHelper.js"></script>
-<script type="text/javascript" src="spec/CardSpec.js"></script>
-<script type="text/javascript" src="spec/HandSpec.js"></script>
-<script type="text/javascript" src="spec/DeckSpec.js"></script>
-<script type="text/javascript" src="spec/PlayerSpec.js"></script>
-<script type="text/javascript" src="spec/ComputerDealerSpec.js"></script>
-</head>
-<body>
-    <h1>Hello this is blackjack.</h1>
-    <div>
-        <form name="buyInForm">
-          <fieldset>
-            <legend>Buy In:</legend>
-            Name: <input required="true" type="text" name="name"/>
-            Buy In Amount: <input required="true" type="number" name="buyInAmount">
-          </fieldset>
-          <input focused="true" type="submit" name="submit" value="Buy In"/>
-        </form>
-    </div>
-</body>
+    
+    <head>
+        <script type="text/javascript" src="lib/zepto.js"></script>
+        <script type="text/javascript" src="src/Card.js"></script>
+        <script type="text/javascript" src="src/Hand.js"></script>
+        <script type="text/javascript" src="src/Deck.js"></script>
+        <script type="text/javascript" src="src/Player.js"></script>
+        <script type="text/javascript" src="src/ComputerDealer.js"></script>
+        <script type="text/javascript" src="src/HumanPlayer.js"></script>
+        <script type="text/javascript">
+            var dealer, player, players, game, playerHand, dealerHand, playerChipCount, hitButton, stayButton, newHandButton, playerHandValue, dealerHandValue;
+            
+            var hideGame = function() {
+                game = $('#game');
+                game.hide();
+            };
+            
+            var hit = function() {
+                player.dealCard(dealer.grabCardFromDeck());
+                playerHand = $("#playerHand");
+                playerHand.html(player.handString()); 
+                
+                playerHandValue = $("#playerHandValue");
+                playerHandValue.html(player.handValue());
+                
+                if (player.handValue() > 21) {
+                    hitButton = $('#hitBtn');
+                    hitButton.prop("disabled", "true");
+                    
+                    stayButton = $('#stayBtn');
+                    stayButton.prop("disabled", "true");
+                    
+                    newHandButton = $('#newHand');
+                    newHandButton.prop("disabled", null);   
+                    
+                    alert("Busted!");
+                    
+                    stay();
+                    
+                } else if (player.handValue() === 21) {
+                    hitButton = $('#hitBtn');
+                    hitButton.prop("disabled", "true");
+                    
+                    stayButton = $('#stayBtn');
+                    stayButton.prop("disabled", "true");
+                    
+                    newHandButton = $('#newHand');
+                    newHandButton.prop("disabled", null);   
+                    
+                    alert("21!");
+                    
+                    stay();
+                }
+            };
+            
+            var stay = function() {
+                if (!dealer.needsMoreCards()) {
+                    dealerHand = $("#dealerHand");
+                    dealerHand.html(dealer.handString());
+                    dealerHandValue = $("#dealerHandValue");
+                    dealerHandValue.html(dealer.handValue());   
+                } else {
+                    while (dealer.needsMoreCards()) {
+                        dealer.dealCard(dealer.grabCardFromDeck());
+                        dealerHand = $("#dealerHand");
+                        dealerHand.html(dealer.handString());
+                        dealerHandValue = $("#dealerHandValue");
+                        dealerHandValue.html(dealer.handValue());
+                    }
+                }
+                
+                hitButton = $('#hitBtn');
+                hitButton.prop("disabled", "true");
+                
+                stayButton = $('#stayBtn');
+                stayButton.prop("disabled", "true");
+                
+                newHandButton = $('#newHand');
+                newHandButton.prop("disabled", null);
+                
+                var statement = "";
+                
+                if (player.handValue() < 22 && (player.handValue() > dealer.handValue() || dealer.handValue() > 21)) {
+                    statement = "Winner!";
+                } else if (dealer.handValue() === player.handValue()) {
+                    statement = "Draw!";
+                } else {
+                    statement = "Loser!";
+                }
+                
+                alert(statement);
+            };
+            
+            var newHand = function() {
+                player.tossHand();
+                dealer.tossHand();
+                
+                player.dealCard(dealer.grabCardFromDeck());
+                player.dealCard(dealer.grabCardFromDeck());
+                
+                dealer.dealCard(dealer.grabCardFromDeck());
+                dealer.dealCard(dealer.grabCardFromDeck());
+                
+                playerHand = $("#playerHand");
+                playerHand.html(player.handString());
+                
+                playerHandValue = $("#playerHandValue");
+                playerHandValue.html(player.handValue());
+                
+                dealerHand = $("#dealerHand");
+                dealerHand.html(dealer.topCardOnlyString());
+                
+                dealerHandValue = $("#dealerHandValue");
+                dealerHandValue.html(dealer.handValue());
+                
+                hitButton = $('#hitBtn');
+                hitButton.prop("disabled", null);
+                
+                stayButton = $('#stayBtn');
+                stayButton.prop("disabled", null);
+                
+                newHandButton = $('#newHand');
+                newHandButton.prop("disabled", "true");
+            };
+            
+            var startGame = function() {
+                dealer = new ComputerDealer('Bob', NUM_DECKS);
+                
+                player = new HumanPlayer($("#playerName").val());
+                player.buyIn($("#buyInAmount").val());
+                
+                players = new Array();
+                
+                players.push(dealer);
+                players.push(player);
+                
+                alert("Welcome: " + player.name);
+                
+                game = $('#game');
+                game.show();
+            };
+        </script>
+    </head>
+    
+    <body onload="hideGame();">
+        <h1>Hello this is blackjack.</h1>
+        <div>
+            <form>
+                <fieldset>
+                    <legend>Buy In:</legend>
+                    Name: <input required="true" type="text" id="playerName" />
+                    Buy In Amount: <input required="true" type="number" id="buyInAmount">
+                </fieldset>
+            </form>
+            <button focused="true" name="buyInButton" onclick="startGame();">Buy In!</button>
+        </div>
+        <div id="game">
+            <div id="playerZone">
+                <p id="chipCount"></p></br>
+                <p id="playerHandValue"></p><p id="playerHand"></p>
+                <button id="hitBtn" onclick="hit();" disabled="true">Hit</button>
+                <button id="stayBtn" onclick="stay();" disabled="true">Stay</button>
+                <button id="newHand" onclick="newHand();">New Hand</button>
+            </div>
+            <div id="dealerZone">
+                <p id="dealerHandValue"></p><p id="dealerHand"></p>
+            </div>
+        </div>
+    </body>
+
 </html>
