@@ -53,4 +53,13 @@ describe("Test a Computer Dealer works.", function() {
         dealer.dealCard(jack);
         expect(dealer.needsMoreCards()).toBe(false);
     });
+    
+    it("A dealer can deal cards", function () {
+        var player = new Player();
+        
+        player.dealCard(dealer.grabCardFromDeck());
+        player.dealCard(dealer.grabCardFromDeck());
+        
+        expect(player.getNumberOfCardsInHand()).toBe(2);
+    });
 });
