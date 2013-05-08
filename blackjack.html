@@ -83,10 +83,13 @@
                 
                 if (player.handValue() < 22 && (player.handValue() > dealer.handValue() || dealer.handValue() > 21)) {
                     statement = "Winner!";
+                    player.winBet();
                 } else if (dealer.handValue() === player.handValue()) {
                     statement = "Draw!";
+                    player.loseBet();
                 } else {
                     statement = "Loser!";
+                    player.drawBet();
                 }
                 
                 alert(statement);
@@ -122,6 +125,8 @@
                 
                 newHandButton = $('#newHand');
                 newHandButton.prop("disabled", "true");
+                
+                player.betChips($('#chipsToBet').val());
             };
             
             var startGame = function() {
@@ -139,6 +144,10 @@
                 
                 game = $('#game');
                 game.show();
+                
+                playerChipCount = $('#chipCount');
+                playerChipCount.empty();
+                playerChipCount.html(player.chipCount());
             };
         </script>
     </head>
@@ -157,7 +166,7 @@
         </div>
         <div id="game">
             <div id="playerZone">
-                <p id="chipCount"></p></br>
+                <p id="chipCount"></p><input type="number" id="chipsToBet" value="0"/></br>
                 <p id="playerHandValue"></p><p id="playerHand"></p>
                 <button id="hitBtn" onclick="hit();" disabled="true">Hit</button>
                 <button id="stayBtn" onclick="stay();" disabled="true">Stay</button>

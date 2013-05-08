@@ -17,7 +17,7 @@ HumanPlayer.prototype.chipCount = function() {
 
 HumanPlayer.prototype.betChips = function(chipsToBet) {
     if (chipsToBet > this.chips) {
-        this.chipsInplay += this.chips;
+        this.chipsInPlay += this.chips;
         this.chips = 0;
     } else {
         this.chips -= chipsToBet;
@@ -31,5 +31,10 @@ HumanPlayer.prototype.loseBet = function () {
 
 HumanPlayer.prototype.winBet = function () {
     this.chips += 2 * this.chipsInPlay;
+    this.chipsInPlay = 0;
+};
+
+HumanPlayer.prototype.drawBet = function () {
+    this.chips += this.chipsInPlay;
     this.chipsInPlay = 0;
 };
